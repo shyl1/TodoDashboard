@@ -29,7 +29,9 @@ export default function Login() {
           <ButtonLogin />
         </div>
         <div className={styles.OR}>OR</div>
-          
+        <div>
+          <button>log in with Google</button>
+        </div>
         </form>
       </div>
     </div>
