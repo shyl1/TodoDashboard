@@ -28,6 +28,7 @@ export default function Login() {
         <div className={styles.btnContainer}>
           <ButtonLogin />
         </div>
+        <div className={styles.OR}>OR</div>
           
         </form>
       </div>

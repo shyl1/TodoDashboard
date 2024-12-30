@@ -18,7 +18,7 @@
   width: 100%;
   background-color: #F2F6FF;
   border: 3px solid #C4D0EB;
-  color: black;
+  color: #202D48;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,4 +44,30 @@
   justify-content: center;
 }
 
+.OR{
+  margin-top: 30px;
+  color: #202D48;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+}
 
+.OR::before{
+  margin-left: 10px;
+  content: '';
+  position: absolute;
+  border: 1px solid #202D48;
+  width: 200px;
+  top: 7px;
+  left: 90%;
+}
+
+.OR::after{
+  margin-right: 10px;
+  content: '';
+  position: absolute;
+  border: 1px solid #202D48;
+  width: 200px;
+  top: 7px;
+  right: 90%;
+}
