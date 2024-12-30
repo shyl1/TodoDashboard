@@ -21,7 +21,13 @@
   color: black;
 }
 
-.emailConatiner ,
+.emailConatiner {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  position: relative;
+}
+
 .passwordContainer{
   width: 100%;
   margin-top: 30px;
@@ -29,7 +35,6 @@
   position: relative;
 }
 
-.email , 
 .password{
   position: absolute;
   top: -25px;
@@ -37,7 +42,6 @@
   margin-bottom: 3px;
 }
 
-.emailInput , 
 .passwordInput {
   width: 100%;
   height: 50px;
