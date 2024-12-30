@@ -1,7 +1,7 @@
 .Container{
   width: 100%;
   background-color: aqua;
-  margin: 300px auto;
+  margin: 200px auto;
   display: flex;
   justify-content: center;
 }
@@ -24,6 +24,20 @@
   align-items: center;
 }
 
+.text{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginIcon{
+  margin-right: 10px;
+}
+
+
 .emailConatiner {
   width: 100%;
   margin-top: 30px;
@@ -34,7 +48,7 @@
 .passwordContainer{
   width: 100%;
   margin-top: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -42,10 +56,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .OR{
-  margin-top: 30px;
+  margin-top: 20px;
   color: #202D48;
   font-size: 16px;
   font-weight: 700;
@@ -70,4 +86,15 @@
   width: 200px;
   top: 7px;
   right: 90%;
+}
+
+.signUpOption{
+  color: #86838388;
+  font-weight: 700;
+}
+
+.SginUp{
+  color: #202D48;
+  border-bottom: 1px solid #202D48;
+  margin-bottom: 30px;
 }
