@@ -8,7 +8,9 @@ function App() {
   
   return (
     <>
-      <Login />
+    <AuthProvider>
+    <Login />S
+    </AuthProvider>
     </>
   )
 }
