@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import styles from '../loginStyling/passwordStyling.module.css';
+import { useState } from 'react';
 
-export class Password extends Component {
-  render() {
-    return (
-      <div>Password</div>
-    )
-  }
+export default function Password() {
+
+  const [password , setPassword] = useState('');
+  return (
+    <>
+    <label htmlFor="password" className={styles.password}>Password</label>
+
+    <input type="password" placeholder='Password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} required className={styles.passwordInput}/>
+    </>
+  )
 }
-
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Password)

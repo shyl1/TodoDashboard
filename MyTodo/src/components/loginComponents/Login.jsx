@@ -1,21 +1,14 @@
 // for styling 
-import { useState } from 'react';
+
 import styles from '../loginStyling/login.module.css';
 import Email from './Email';
+import Password from './Password';
 //import {useNavigate} from 'react-router-dom';
 export default function Login() {
-
-
-  const [password , setPassword] = useState('');
-
-
-  // handled
+ // handled
   function handleSubmit(e){
     e.preventDefault();
   }
-
-
-
 
   //const navigate = useNavigate();
 
@@ -30,8 +23,8 @@ export default function Login() {
           <Email />
         </div>
           <div className={styles.passwordContainer}>
-            <label htmlFor="password" className={styles.password}>Password</label>
-            <input type="password" placeholder='Password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} required className={styles.passwordInput}/>
+            <Password />
+            
           </div>
           <button type='submit'>login</button>
         </form>
