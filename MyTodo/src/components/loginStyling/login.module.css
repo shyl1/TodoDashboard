@@ -1,0 +1,14 @@
+.Container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.LoginContainer{
+  position: absolute;
+  background: black;
+  color: white;
+  width: 600px;
+  height: auto;
+}
