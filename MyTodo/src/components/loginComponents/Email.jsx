@@ -1,14 +1,17 @@
-import { useState } from "react";
 import styles from '../loginStyling/emailStying.module.css';
 
-export default function Email() {
-    // take the email value fron the input by state
-    const [email , setEmail] = useState('');
+export default function Email({ email, setEmail, isEmailValid }) {
+    
   return (
     <>
         <label htmlFor='email' className={styles.email}>E-mail</label>
 
-        <input type="text" className={styles.emailInput} placeholder='Email' value={email} onChange={(e)=> setEmail(e.target.value)} id='email' required/>
+        <input type="email" className={`${styles.emailInput} ${!isEmailValid ? styles.invaildInput : ''}`} placeholder='Email' value={email} onChange={(e)=> setEmail(e.target.value)} id='email' 
+        required/>
+
+        {!isEmailValid && (
+          <span className={styles.errorMsg}>Please enter a valid email</span>
+        )}
     </>
   )
 }
