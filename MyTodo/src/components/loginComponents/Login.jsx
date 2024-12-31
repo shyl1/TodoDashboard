@@ -16,26 +16,36 @@ export default function Login() {
  // handled
   function handleSubmit(e){
     e.preventDefault();
-    const isValid =validateEmail(email);
+    const isValidEmail =validateEmail(email);
+    const isValidPassword = validatePassword(password);
 
-    if(isValid){
+    if(isValidEmail && isValidPassword ){
       setIsEmailValid(true);
+      setIsPasswordValid(true);
     } else {
       setIsEmailValid(false);
+      setIsPasswordValid(false);
     }
   }
   //handling email validation 
   // take the email value fron the input by state
   const [email , setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+
+  const [password , setPassword] = useState('');
+  const [isPasswordValid ,setIsPasswordValid] = useState(true);
   
 
   //validating email 
   function validateEmail(email){
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
+  function validatePassword(password){
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  }
 
   return (
     <div className={styles.Container}>
@@ -49,7 +59,7 @@ export default function Login() {
           <Email email={email} setEmail={setEmail} isEmailValid={isEmailValid}/>
         </div>
         <div className={styles.passwordContainer}>
-          <Password />
+          <Password password={password} setPassword={setPassword} isPasswordValid={isPasswordValid}/>
         </div>
         <div className={styles.btnContainer}>
           <ButtonLogin />
