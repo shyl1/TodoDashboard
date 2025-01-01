@@ -1,26 +1,32 @@
-// import { Children, createContext, useState } from "react";
+import { children, createContext, useState } from "react";
 
-// const AuthContext = createContext();
+const AuthContext = createContext();
 
-// //const useAuth = useContext(AuthContext);
+//const useAuth = useContext(AuthContext);
 
-// function AuthProvider({ Children }){
-//   //state value to know if the usre logged in or not to keep updating the state
-//   const [logged, setLogged] = useState(false);
+function AuthProvider({ children }){
+  // store user data after login / signup
+  const [user , setUser] = useState(null);
+  // track authentication status 
+  const [isAuthenticated ,setIsAuthenticated] = useState(false);
 
-//   function login(){
-//     setLogged(true);
-//     localStorage.setItem('logged' , 'true');
-//   }
+    //validating email 
+    function validateEmail(email){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+  
+    function validatePassword(password){
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      return passwordRegex.test(password);
+    }
 
-//   function logout(){
-//     setLogged(false);
-//   }
-//   return (
-//     <AuthContext.Provider value={{logged , login , logout}}>
-//       {Children}
-//     </AuthContext.Provider>
-//   );
-// }
 
-// export {AuthProvider , AuthContext}
+  return (
+    <AuthContext.Provider value={{user, setUser ,isAuthenticated, validateEmail,validatePassword , setIsAuthenticated}}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export {AuthProvider , AuthContext}
