@@ -1,4 +1,4 @@
-import styles from "../loginStyling/buttonStyling.module.css";
+import styles from "../../sharedStyling/buttonStyling.module.css";
 
 export default function ButtonLogin({type , onClick }) {
   return (

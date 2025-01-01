@@ -1,4 +1,4 @@
-import styles from '../loginStyling/passwordStyling.module.css';
+import styles from '../sharedStyling/passwordStyling.module.css';
 
 export default function Password({password, setPassword ,isPasswordValid}) {
   return (

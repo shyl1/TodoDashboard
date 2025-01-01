@@ -1,4 +1,4 @@
-import styles from '../loginStyling/emailStying.module.css';
+import styles from '../sharedStyling/emailStying.module.css';
 
 export default function Email({ email, setEmail, isEmailValid }) {
     

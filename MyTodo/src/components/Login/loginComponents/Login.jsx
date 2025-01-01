@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
 //importing AuthContext that has shared validation logic
-import { AuthContext } from '../AuthenticationContext';
+import { AuthContext } from '../../AuthenticationContext';
 
 //importing form login components
-import Email from './Email';
-import Password from './Password';
+import Email from '../../sharedComponents/Email';
+import Password from '../../sharedComponents/Password';
 import ButtonLogin from './ButtonLogin';
 import LoginWithGoogle from './LoginWithGoogle';
 import LoginIcon from '@mui/icons-material/Login';

@@ -96,6 +96,9 @@
 
 .SginUp{
   color: #202D48;
-  border-bottom: 1px solid #202D48;
-  margin-bottom: 30px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.SginUp:hover{
+  text-decoration: underline;
 }

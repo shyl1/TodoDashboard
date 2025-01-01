@@ -1,5 +1,5 @@
 import GoogleIcon from '@mui/icons-material/Google';
-import styles from '../loginStyling/loginwithgoogle.module.css';
+import styles from '../../sharedStyling/loginwithgoogle.module.css';
 export default function LoginWithGoogle() {
   return (
     <>

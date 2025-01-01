@@ -2,10 +2,17 @@
 import { useContext } from 'react';
 import styles from '../SignUpStyling/signup.module.css';
 
-import UserName from "./UserName";
+
 import { AuthContext } from '../../AuthenticationContext';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+
+//improting components
+import UserName from "./UserName";
+import Email from '../../sharedComponents/Email';
+import Password from '../../sharedComponents/Password';
+import ButtonSignUp from './ButtonSignUp';
+import SignUpWithGoogle from './SignUpWithGoogle.jsx';
 
 
 export default function SignUp() {
@@ -20,8 +27,7 @@ export default function SignUp() {
   const [password , setPassword] = useState('');
   const [isPasswordValid ,setIsPasswordValid] = useState(true);
 
-
-
+  const [username , setUserName] =useState('');
 
   function handleSubmit(e){
     e.preventDefault();
@@ -37,6 +43,14 @@ export default function SignUp() {
     }
   };
 
+  function handleClick(){
+    navigate("/dashboard");
+  }
+  function handleClickToLogin(){
+    navigate('/');
+
+  }
+
   return (
     <div className={styles.Container}>
       <div className={styles.LoginContainer}>
@@ -44,18 +58,18 @@ export default function SignUp() {
         <div className={styles.text}>
           <h1>SignUp</h1>
         </div>
-        {/* <div className={styles.nameContainer}>
-          <UserName />
+        <div className={styles.nameContainer}>
+          <UserName username={username} setUserName={setUserName}/>
         </div>
         <div className={styles.emailConatiner}>
           <Email email={email} setEmail={setEmail} isEmailValid={isEmailValid}/>
         </div>
         <div className={styles.passwordContainer}>
           <Password password={password} setPassword={setPassword} isPasswordValid={isPasswordValid}/>
-        </div> */}
-        {/* <div>
+        </div>
+        <div className={styles.checkContainer}>
           <input type="checkbox" id="agree" />
-          <label htmlFor="agree">I agree to the terms & conditions</label>
+          <label htmlFor="agree"> I agree to the terms & conditions</label>
         </div>
         <div className={styles.btnContainer}>
           <ButtonSignUp type="submit" onClick={handleClick}/>
@@ -64,11 +78,11 @@ export default function SignUp() {
           OR
         </div>
         <div className={styles.btnContainer}>
-          <LoginWithGoogle />
+          <SignUpWithGoogle/>
         </div>
-        <div className={styles.signUpOption}>
-          Already have an account? <strong className={styles.SginUp} onClick={handleClickToSign}>Log in</strong>
-        </div>  */}
+        <div className={styles.loginOption}>
+          Already have an account? <strong className={styles.login} onClick={handleClickToLogin}>Log in</strong>
+        </div>
         </form>
       </div>
     </div>

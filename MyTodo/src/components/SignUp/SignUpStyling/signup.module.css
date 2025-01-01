@@ -1,6 +1,6 @@
 .Container{
   width: 100%;
-  margin: 200px auto;
+  margin: 130px auto;
   display: flex;
   justify-content: center;
 }
@@ -53,4 +53,62 @@
   margin-top: 30px;
   margin-bottom: 10px;
   position: relative;
+}
+.checkContainer{
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+
+.btnContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.OR{
+  margin-top: 20px;
+  color: #202D48;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+}
+
+.OR::before{
+  margin-left: 10px;
+  content: '';
+  position: absolute;
+  border: 1px solid #202D48;
+  width: 200px;
+  top: 7px;
+  left: 90%;
+}
+
+.OR::after{
+  margin-right: 10px;
+  content: '';
+  position: absolute;
+  border: 1px solid #202D48;
+  width: 200px;
+  top: 7px;
+  right: 90%;
+}
+
+.loginOption{
+  color: #86838388;
+  font-weight: 700;
+}
+
+.login{
+  color: #202D48;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login:hover{
+  text-decoration: underline;
 }
