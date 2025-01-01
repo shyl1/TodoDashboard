@@ -1,6 +1,8 @@
 // for styling 
 import styles from '../loginStyling/login.module.css';
+//importing hooks
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 //importing form login components
 import Email from './Email';
@@ -10,23 +12,11 @@ import LoginWithGoogle from './LoginWithGoogle';
 import LoginIcon from '@mui/icons-material/Login';
 
 
+
 //import {useNavigate} from 'react-router-dom';
 export default function Login() {
-    //const navigate = useNavigate();
- // handled
-  function handleSubmit(e){
-    e.preventDefault();
-    const isValidEmail =validateEmail(email);
-    const isValidPassword = validatePassword(password);
 
-    if(isValidEmail && isValidPassword ){
-      setIsEmailValid(true);
-      setIsPasswordValid(true);
-    } else {
-      setIsEmailValid(false);
-      setIsPasswordValid(false);
-    }
-  }
+  const navigate = useNavigate();
   //handling email validation 
   // take the email value fron the input by state
   const [email , setEmail] = useState('');
@@ -34,9 +24,8 @@ export default function Login() {
 
   const [password , setPassword] = useState('');
   const [isPasswordValid ,setIsPasswordValid] = useState(true);
-  
 
-  //validating email 
+   //validating email 
   function validateEmail(email){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -46,6 +35,28 @@ export default function Login() {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   }
+
+
+  
+ // handled
+  function handleSubmit(e){
+    e.preventDefault();
+    const isValidEmail =validateEmail(email);
+    const isValidPassword = validatePassword(password);
+
+    setIsEmailValid(isEmailValid);
+    setIsPasswordValid(isPasswordValid);
+
+    if(isValidEmail && isValidPassword ){
+      navigate("/dashboard");
+    }
+  }
+  
+  function handleClick(){
+    navigate("/dashboard");
+  }
+  
+
 
   return (
     <div className={styles.Container}>
@@ -62,7 +73,7 @@ export default function Login() {
           <Password password={password} setPassword={setPassword} isPasswordValid={isPasswordValid}/>
         </div>
         <div className={styles.btnContainer}>
-          <ButtonLogin />
+          <ButtonLogin type="submit" onClick={handleClick}/>
         </div>
         <div className={styles.OR}>
           OR
