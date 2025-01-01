@@ -13,6 +13,7 @@ import Email from '../../sharedComponents/Email';
 import Password from '../../sharedComponents/Password';
 import ButtonSignUp from './ButtonSignUp';
 import SignUpWithGoogle from './SignUpWithGoogle.jsx';
+import Checkbox from './Checkbox.jsx';
 
 
 export default function SignUp() {
@@ -28,6 +29,9 @@ export default function SignUp() {
   const [isPasswordValid ,setIsPasswordValid] = useState(true);
 
   const [username , setUserName] =useState('');
+  //checkbox
+  const [isChecked, setIsChecked] = useState(false);
+  const [error, setError] = useState('');
 
   function handleSubmit(e){
     e.preventDefault();
@@ -36,8 +40,16 @@ export default function SignUp() {
 
     setIsEmailValid(isEmailValid);
     setIsPasswordValid(isValidPassword);
+    if(!isChecked){
+      setError('Please check the checkbox to proceed.'); // Set error message
+      console.log('Form submission prevented: Checkbox is unchecked'); // Debuggings
+      return; // Stop form submission
+    } else {
+      setError(''); // Clear error message
+      console.log('Form submitted!');
+    }
 
-    if(isValidEmail && isValidPassword ){
+    if(isValidEmail && isValidPassword){
       setIsAuthenticated(true); //update global auth store
       navigate("/dashboard");
     }
@@ -68,8 +80,7 @@ export default function SignUp() {
           <Password password={password} setPassword={setPassword} isPasswordValid={isPasswordValid}/>
         </div>
         <div className={styles.checkContainer}>
-          <input type="checkbox" id="agree" />
-          <label htmlFor="agree"> I agree to the terms & conditions</label>
+          <Checkbox isChecked={isChecked} setIsChecked={setIsChecked} error={error} />
         </div>
         <div className={styles.btnContainer}>
           <ButtonSignUp type="submit" onClick={handleClick}/>
