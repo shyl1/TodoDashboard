@@ -4,11 +4,16 @@ const AuthContext = createContext();
 
 //const useAuth = useContext(AuthContext);
 
+
 function AuthProvider({ children }){
   // store user data after login / signup
-  const [user , setUser] = useState(null);
+  // const [user , setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+  //const [user , setUser] = useState('')
   // track authentication status 
-  const [isAuthenticated , setIsAuthenticated] = useState( localStorage.getItem("isAuthenticated") === "true")
+  const [isAuthenticated , setIsAuthenticated] = useState( localStorage.getItem("isAuthenticated") === "true");
+
+  //Add a state to track if the user has attempted to authenticate.
+  const [hasAttempted, setHasAttempted] = useState(false);
 
     //validating email 
     function validateEmail(email){
@@ -24,16 +29,22 @@ function AuthProvider({ children }){
 
     function login(){
       setIsAuthenticated(true);
+      setHasAttempted(true);
+      //setUser(userData);
       localStorage.setItem("isAuthenticated", "true");
+      //localStorage.setItem("user", JSON.stringify(userData));
     };
     
     function logout() {
       setIsAuthenticated(false);
+      setHasAttempted(false);
+      //setUser(null);
       localStorage.removeItem("isAuthenticated");
+      //localStorage.removeItem("user");
     };
     
   return (
-    <AuthContext.Provider value={{user, setUser ,isAuthenticated,setIsAuthenticated, validateEmail,validatePassword , login , logout}}>
+    <AuthContext.Provider value={{isAuthenticated,setIsAuthenticated, validateEmail,validatePassword , login , logout , hasAttempted,setHasAttempted }}>
       {children}
     </AuthContext.Provider>
   );

@@ -18,7 +18,7 @@ import LoginIcon from '@mui/icons-material/Login';
 
 
 export default function Login() {
-  const {validateEmail , validatePassword , login }= useContext(AuthContext);
+  const {validateEmail , validatePassword , login , logout}= useContext(AuthContext);
 
   const navigate = useNavigate();
   //handling email validation 
@@ -38,10 +38,11 @@ export default function Login() {
     setIsPasswordValid(isValidPassword);
 
     if (isValidEmail && isValidPassword) {
-      console.log("Setting isAuthenticated to true");
+      //console.log("Setting isAuthenticated to true");
       login(); // Set authentication state
       navigate("/dashboard");
     }
+   //logout();
   }
   
   function handleClick(){
