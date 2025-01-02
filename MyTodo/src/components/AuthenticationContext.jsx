@@ -1,4 +1,4 @@
-import { children, createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -8,7 +8,7 @@ function AuthProvider({ children }){
   // store user data after login / signup
   const [user , setUser] = useState(null);
   // track authentication status 
-  const [isAuthenticated ,setIsAuthenticated] = useState(false);
+  const [isAuthenticated , setIsAuthenticated] = useState( localStorage.getItem("isAuthenticated") === "true")
 
     //validating email 
     function validateEmail(email){
@@ -17,13 +17,23 @@ function AuthProvider({ children }){
     }
   
     function validatePassword(password){
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const passwordRegex = /^.{8,}$/; // Only check for minimum length
       return passwordRegex.test(password);
     }
 
-
+    function login(){
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true");
+    };
+    
+    function logout() {
+      setIsAuthenticated(false);
+      localStorage.removeItem("isAuthenticated");
+    };
+    
   return (
-    <AuthContext.Provider value={{user, setUser ,isAuthenticated, validateEmail,validatePassword , setIsAuthenticated}}>
+    <AuthContext.Provider value={{user, setUser ,isAuthenticated,setIsAuthenticated, validateEmail,validatePassword , login , logout}}>
       {children}
     </AuthContext.Provider>
   );

@@ -2,7 +2,7 @@
 import styles from '../loginStyling/login.module.css';
 
 //importing hooks
-import { useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
@@ -17,11 +17,8 @@ import LoginWithGoogle from './LoginWithGoogle';
 import LoginIcon from '@mui/icons-material/Login';
 
 
-
-
-//import {useNavigate} from 'react-router-dom';
 export default function Login() {
-  const {validateEmail , validatePassword , setIsAuthenticated}= useContext(AuthContext);
+  const {validateEmail , validatePassword , login }= useContext(AuthContext);
 
   const navigate = useNavigate();
   //handling email validation 
@@ -32,17 +29,17 @@ export default function Login() {
   const [password , setPassword] = useState('');
   const [isPasswordValid ,setIsPasswordValid] = useState(true);
 
- // handled
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
-    const isValidEmail =validateEmail(email);
+    const isValidEmail = validateEmail(email);
     const isValidPassword = validatePassword(password);
 
-    setIsEmailValid(isEmailValid);
-    setIsPasswordValid(isPasswordValid);
+    setIsEmailValid(isValidEmail);
+    setIsPasswordValid(isValidPassword);
 
-    if(isValidEmail && isValidPassword ){
-      setIsAuthenticated(true);
+    if (isValidEmail && isValidPassword) {
+      console.log("Setting isAuthenticated to true");
+      login(); // Set authentication state
       navigate("/dashboard");
     }
   }
