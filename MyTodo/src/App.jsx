@@ -2,7 +2,7 @@ import Login from './components/Login/loginComponents/Login.jsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import { AuthProvider } from './components/AuthenticationContext.jsx';
 import './App.css';
-import DashBoard from './components/Dashboardcomponents/DashBoard.jsx';
+import DashBoard from './components/Dashboardcomponents/Dashboard/DashBoard.jsx';
 import SignUp from './components/SignUp/SignUpComonents/SignUp.jsx';
 import { ProtectedRoutes } from './utils/ProtectedRoutes.jsx';
 
