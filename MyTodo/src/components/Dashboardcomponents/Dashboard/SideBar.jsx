@@ -9,7 +9,8 @@ export default function SideBar() {
         <h1 className={styles.text}>TODO</h1>
       </div>
       <div className={styles.pages}>
-      <FaBorderAll size={30}/><h1>Dashboard</h1>  
+      <FaBorderAll size={20}/>
+      <h1 className={styles.Page}>Dashboard</h1>  
       </div>
     </div>
     </>
