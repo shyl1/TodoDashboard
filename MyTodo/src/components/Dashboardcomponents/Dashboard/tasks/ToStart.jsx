@@ -3,21 +3,16 @@ import { useState } from 'react';
 import styles from '../../dashboardStyling/tasksStyling/tostart.module.css';
 import { FaCircle } from "react-icons/fa";
 import { RiEditLine } from "react-icons/ri";
+import ShowForm from '../Card/ShowForm';
 
-export default function ToStart({tasks = [] , showForm , addOrUpdateTask , setShowForm , updateTaskStatus}) {
+export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , updateTaskStatus ,showForm}) {
   // settin info of task
   const [title , setTitle] = useState("");
   const [description, setDescription] = useState("");
   //track the task being edited
   const [editingTask , setEditingTask] = useState(null);
 
-  function handleSubmit(e){
-    e.preventDefault();
-    addOrUpdateTask(editingTask?.id,title,description);
-    setTitle("");
-    setDescription("");
-    setEditingTask(null); // Reset editing state
-  }
+
 
   function handleEdit(task){
     setEditingTask(task); //set the task that is being edited
@@ -54,18 +49,9 @@ export default function ToStart({tasks = [] , showForm , addOrUpdateTask , setSh
 
         <div className={styles.innerContainer} onDrop={(e)=> handleDrop(e , "To Start")} onDragOver={handleDragOver}>
           {/* Display the form if showForm is true */}
-          {showForm && (
-            <div className={styles.formContainer}>
-              <form className={styles.form} onSubmit={handleSubmit}>
-                <input type="text" placeholder='title' value={title} onChange={(e) => setTitle(e.target.value)} className={styles.inputField}/>
-                <textarea placeholder='Description' value={description} onChange={(e)=> setDescription(e.target.value)} className={styles.textareaField}></textarea>
-                <button type='submit' className={styles.addButton}>{editingTask ? "Update" : "add Task"}</button>
-              </form>
-            </div>
-          )}
+          <ShowForm tasks={tasks} title={title} description={description} addOrUpdateTask={addOrUpdateTask} setTitle={setTitle} setDescription={setDescription} setEditingTask={setEditingTask} editingTask={editingTask} showForm={showForm} />
 
           {/* Display the task cards */}
-          <div className={styles.innerContainer}>
             {toStartTasks.map((task)=>{
               //console.log("Rendering Task:", task); // Debugging: Log each task
               return(<div className={styles.card} key={task.id} draggable onDragStart={(e)=> handleDragStart(e, task.id)}>
@@ -85,7 +71,6 @@ export default function ToStart({tasks = [] , showForm , addOrUpdateTask , setSh
               </div>);
             })}
             </div>
-          </div>
 
 
         

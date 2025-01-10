@@ -69,10 +69,8 @@ export default function TodoSide() {
         <div className={styles.tasks}>
           {/* pass tasks , showForm and addTask to the ToStart component*/}
           <ToStart  key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
-          {/* pass tasks , showForm and addTask to the inProgress component*/}
-          <InProgress key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
-          {/* pass tasks , showForm and addTask to the completed component*/}
-          <Completed key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
+          <InProgress />
+          <Completed />
         </div>
       </div>
 
