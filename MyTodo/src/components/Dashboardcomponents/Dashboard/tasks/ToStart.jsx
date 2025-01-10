@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styles from '../../dashboardStyling/tasksStyling/tostart.module.css';
 import { FaCircle } from "react-icons/fa";
-import { RiEditLine } from "react-icons/ri";
 import ShowForm from '../Card/ShowForm';
+import DisplayCard from '../Card/DisplayCard';
 
 export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , updateTaskStatus ,showForm}) {
   // settin info of task
@@ -13,21 +13,10 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
   const [editingTask , setEditingTask] = useState(null);
 
 
-
-  function handleEdit(task){
-    setEditingTask(task); //set the task that is being edited
-    setTitle(task.title); // set the new title
-    setDescription(task.description); // new or edited desc
-    setShowForm(true);
-  }
-
    // filter tasks with status "To Start"
   const toStartTasks = tasks? tasks.filter((task)=> task.status === "To Start") : [];
 
-  //Handle drag start
-  function handleDragStart(e , taskId){
-    e.dataTransfer.setData("taskId" ,taskId);
-  }
+  
 
   //Handle Drop 
   function handleDrop(e , newStatus){
@@ -53,24 +42,9 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
 
           {/* Display the task cards */}
             {toStartTasks.map((task)=>{
-              //console.log("Rendering Task:", task); // Debugging: Log each task
-              return(<div className={styles.card} key={task.id} draggable onDragStart={(e)=> handleDragStart(e, task.id)}>
-                <div className={styles.textContainer}>
-                  <h2 className={styles.title}>{task.title}</h2>
-                  <div className={styles.iconContainer}>
-                  <RiEditLine className={styles.editingIcon} onClick={()=> handleEdit(task)}/>
-                  </div>
-                </div>
-                <div className={styles.content}>
-                  <p>{task.description}</p>
-                </div>
-                <div className={styles.taskDate}>
-                  {/* Display the creation date */}
-                  <p>Created on: {new Date(task.createdAt).toLocaleDateString()}</p>
-                </div>
-              </div>);
+              return( <DisplayCard  key={task.id} task={task}  setEditingTask={setEditingTask} setTitle={setTitle} setDescription={setDescription} setShowForm={setShowForm}/>);
             })}
-            </div>
+        </div>
 
 
         
