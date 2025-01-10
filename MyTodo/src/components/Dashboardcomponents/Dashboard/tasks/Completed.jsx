@@ -2,7 +2,9 @@ import styles from '../../dashboardStyling/tasksStyling/completed.module.css';
 import { FaCircle } from "react-icons/fa";
 import { RiEditLine } from "react-icons/ri";
 
-export default function Completed() {
+export default function Completed({tasks = [] , showForm , addOrUpdateTask , setShowForm , updateTaskStatus}) {
+
+  
   return (
     <>
       <div className={styles.completedConatiner}>

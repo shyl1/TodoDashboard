@@ -6,8 +6,44 @@ import RightPart from './RightPart';
 import ToStart from './tasks/ToStart';
 import InProgress from './tasks/InProgress';
 import Completed from './tasks/Completed';
+import { useState } from 'react';
 
 export default function TodoSide() {
+   //set a list of tasks
+  const [tasks, setTasks] = useState([]);
+   // set up a form for adding new tasks
+  const [showForm , setShowForm] = useState(false);
+
+  //console.log("Tasks in TodoSide:", tasks); // Debugging: Log tasks
+
+  // add new task or update
+  function addOrUpdateTask(taskId, title , description){
+    //create newTask object that contains the info of the task
+    if(title && description){
+      if(taskId){
+        //update existing  task
+        setTasks((preTasks)=> preTasks.map((task)=> task.id === taskId ? {...task , title , description} : task));
+      } else {
+        //add new task
+        const newTask = {
+          id: Date.now() , 
+          title,
+          description,
+          status:"To Start", // default status
+          createdAt: new Date().toISOString(), //store the creation Date
+        };
+        //append the  new task to tasks list
+        setTasks([...tasks , newTask]);
+      }
+      setShowForm(false); // hide the form after adding task
+    }
+  }
+
+  //update task status when dragged to a new column
+  function updateTaskStatus(taskId , newStatus){
+    setTasks((prevTasks)=> prevTasks.map((task) => task.id === taskId ? {...task , newStatus} : task));
+  }
+
   return (
     <>
       <div className={styles.todoContainer}>
@@ -27,17 +63,19 @@ export default function TodoSide() {
             <LeftPart />
           </div>
           <div>
-            <RightPart/>
+            <RightPart setShowForm={setShowForm}/>
           </div>
         </div>
         <div className={styles.tasks}>
-          <ToStart/>
-          <InProgress />
-          <Completed />
+          {/* pass tasks , showForm and addTask to the ToStart component*/}
+          <ToStart  key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
+          {/* pass tasks , showForm and addTask to the inProgress component*/}
+          <InProgress key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
+          {/* pass tasks , showForm and addTask to the completed component*/}
+          <Completed key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
         </div>
       </div>
 
     </>
-    
   )
 }

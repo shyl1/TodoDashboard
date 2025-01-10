@@ -1,11 +1,19 @@
 import styles from '../dashboardStyling/rightpart.module.css';
 import { CiCirclePlus } from "react-icons/ci";
 
-export default function RightPart() {
+
+export default function RightPart({setShowForm}) {
+
+ // function to handle clicking on the newtask button
+    function handleClick(e){
+      e.preventDefault();
+      setShowForm(true); // show the form when the button is clicked
+    }
+  
   return (
     <>
     <div className={styles.topContainer}>
-      <button type='submit' className={styles.btn}><CiCirclePlus />New Task</button>
+      <button type='submit' className={styles.btn} onClick={handleClick}><CiCirclePlus />New Task</button>
       <div className={styles.profile}></div>
     </div>
     <div className={styles.bottomContainer}>
@@ -16,6 +24,7 @@ export default function RightPart() {
       <input type="date" className={styles.from}/>
     </div>
     </div>
+
     </>
   )
 }
