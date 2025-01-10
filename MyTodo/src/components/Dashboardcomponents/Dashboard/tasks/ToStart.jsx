@@ -30,6 +30,17 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
     e.preventDefault();
   }
 
+  // Handle form submission
+  function handleFormSubmit() {
+    if (title && description) {
+      addOrUpdateTask(editingTask?.id, title, description);
+      setTitle("");
+      setDescription("");
+      setEditingTask(null); // Reset editing state
+      setShowForm(false); // Hide the form after submission
+    }
+  }
+
   
   return (
     <>
@@ -38,26 +49,22 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
 
         <div className={styles.innerContainer} onDrop={(e)=> handleDrop(e , "To Start")} onDragOver={handleDragOver}>
           {/* Display the form if showForm is true */}
-          <ShowForm tasks={tasks} title={title} description={description} addOrUpdateTask={addOrUpdateTask} setTitle={setTitle} setDescription={setDescription} setEditingTask={setEditingTask} editingTask={editingTask} showForm={showForm} />
+            <ShowForm 
+            title={title} 
+            description={description} 
+            addOrUpdateTask={addOrUpdateTask} 
+            setTitle={setTitle} 
+            setDescription={setDescription} 
+            setEditingTask={setEditingTask} 
+            editingTask={editingTask} 
+            showForm={showForm} 
+            onSubmit={handleFormSubmit}/>
 
           {/* Display the task cards */}
             {toStartTasks.map((task)=>{
               return( <DisplayCard  key={task.id} task={task}  setEditingTask={setEditingTask} setTitle={setTitle} setDescription={setDescription} setShowForm={setShowForm}/>);
             })}
         </div>
-
-
-        
-        {/* 
-          <div className={styles.card}>
-            <div className={styles.textContainer}>
-              <h2 className={styles.title}></h2>
-              <div className={styles.iconContainer}>
-                <RiEditLine className={styles.editingIcon}/>
-                {/* <div className={styles.edit}>
-                  <button className={styles.btn}>Edit</button>
-                  <button className={styles.btn}>Delete</button>
-                </div> */}
       </div>
     </>
   )

@@ -15,8 +15,11 @@ export default function ShowForm({addOrUpdateTask ,setTitle, setDescription , se
       {showForm && (
         <div className={styles.formContainer}>
           <form className={styles.form} onSubmit={handleSubmit}>
+
             <input type="text" placeholder='title' value={title} onChange={(e) => setTitle(e.target.value)} className={styles.inputField}/>
+
             <textarea placeholder='Description' value={description} onChange={(e)=> setDescription(e.target.value)} className={styles.textareaField}></textarea>
+            
             <button type='submit' className={styles.addButton}>{editingTask ? "Update" : "add Task"}</button>
           </form>
         </div>

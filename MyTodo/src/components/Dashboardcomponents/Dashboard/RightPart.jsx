@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from '../dashboardStyling/rightpart.module.css';
 import { CiCirclePlus } from "react-icons/ci";
 
@@ -28,3 +29,8 @@ export default function RightPart({setShowForm}) {
     </>
   )
 }
+
+// Add prop type validation
+RightPart.propTypes = {
+  setShowForm: PropTypes.func.isRequired,
+};

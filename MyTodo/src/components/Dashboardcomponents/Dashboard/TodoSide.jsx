@@ -14,7 +14,7 @@ export default function TodoSide() {
    // set up a form for adding new tasks
   const [showForm , setShowForm] = useState(false);
 
-  //console.log("Tasks in TodoSide:", tasks); // Debugging: Log tasks
+
 
   // add new task or update
   function addOrUpdateTask(taskId, title , description){
@@ -41,7 +41,7 @@ export default function TodoSide() {
 
   //update task status when dragged to a new column
   function updateTaskStatus(taskId , newStatus){
-    setTasks((prevTasks)=> prevTasks.map((task) => task.id === taskId ? {...task , newStatus} : task));
+    setTasks((prevTasks)=> prevTasks.map((task) => task.id === taskId ? {...task , status : newStatus} : task));
   }
 
   return (
@@ -68,9 +68,29 @@ export default function TodoSide() {
         </div>
         <div className={styles.tasks}>
           {/* pass tasks , showForm and addTask to the ToStart component*/}
-          <ToStart  key={tasks ? tasks.length : 0} tasks={tasks} showForm={showForm} addOrUpdateTask={addOrUpdateTask} setShowForm={setShowForm} updateTaskStatus={updateTaskStatus}/>
-          <InProgress />
-          <Completed />
+          <ToStart 
+          key={`toStart-${tasks.filter((task)=> task.status === "To Start").length}`} 
+          tasks={tasks} 
+          showForm={showForm} 
+          addOrUpdateTask={addOrUpdateTask} 
+          setShowForm={setShowForm} 
+          updateTaskStatus={updateTaskStatus}
+          />
+
+          <InProgress
+          key={`inProgress-${tasks.filter((task)=> task.status === "in Progress").length}`} 
+          tasks={tasks} 
+          addOrUpdateTask={addOrUpdateTask} 
+          setShowForm={setShowForm} 
+          updateTaskStatus={updateTaskStatus}
+          />
+          <Completed 
+          key={`completed-${tasks.filter((task)=> task.status === "Completed").length}`} 
+          tasks={tasks} 
+          addOrUpdateTask={addOrUpdateTask} 
+          setShowForm={setShowForm} 
+          updateTaskStatus={updateTaskStatus}
+          />
         </div>
       </div>
 
