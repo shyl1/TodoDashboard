@@ -55,14 +55,16 @@
 
 .edit{
   position: absolute;
+  top: 27px;
+  left: 5px;
   width: 100px;
   height: 70px;
-  border: 1px solid #C4D0EB;
+  border: 1px solid #53535383;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
-  background-color: white;
+  background-color:#C4D0EB ;
   border-radius: 10px;
 }
 
@@ -75,7 +77,7 @@
   background-color: transparent;
 }
 .btn:hover{
-  background-color:#C4D0EB;
+  background-color:white;
 }
 
 .content{

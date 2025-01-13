@@ -1,16 +1,28 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+//import PropTypes from 'prop-types';
 import styles from '../../dashboardStyling/tasksStyling/tostart.module.css';
 import { FaCircle } from "react-icons/fa";
 import ShowForm from '../Card/ShowForm';
 import DisplayCard from '../Card/DisplayCard';
 
-export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , updateTaskStatus ,showForm}) {
+export default function ToStart({tasks = [],
+  showForm,
+  addOrUpdateTask,
+  setShowForm,
+  updateTaskStatus,
+  setTasks,
+  editingTask,
+  setEditingTask,
+  setTitle,
+  setDescription,
+  title,
+  description
+}) {
+
   // settin info of task
-  const [title , setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  //const [title , setTitle] = useState("");
+  //const [description, setDescription] = useState("");
   //track the task being edited
-  const [editingTask , setEditingTask] = useState(null);
+  //const [editingTask , setEditingTask] = useState(null);
 
 
    // filter tasks with status "To Start"
@@ -30,17 +42,6 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
     e.preventDefault();
   }
 
-  // Handle form submission
-  function handleFormSubmit() {
-    if (title && description) {
-      addOrUpdateTask(editingTask?.id, title, description);
-      setTitle("");
-      setDescription("");
-      setEditingTask(null); // Reset editing state
-      setShowForm(false); // Hide the form after submission
-    }
-  }
-
   
   return (
     <>
@@ -49,7 +50,33 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
 
         <div className={styles.innerContainer} onDrop={(e)=> handleDrop(e , "To Start")} onDragOver={handleDragOver}>
           {/* Display the form if showForm is true */}
-            <ShowForm 
+          {
+            toStartTasks.map((task) => {
+              if(editingTask?.id === task.id){
+                return (
+                  <ShowForm 
+                  key={task.id}
+                  addOrUpdateTask={addOrUpdateTask}
+                  setTitle={setTitle}
+                  setDescription={setDescription}
+                  setShowForm={setShowForm}
+                  title={title}
+                  description={description}
+                  showForm={showForm}
+                  /> 
+                );
+              } else {
+                <DisplayCard 
+                key={task.id} 
+                task={task}  
+                setEditingTask={setEditingTask} 
+                setShowForm={setShowForm}
+                addOrUpdateTask={addOrUpdateTask}
+                />
+              }
+            })
+          } 
+            {/* <ShowForm 
             title={title} 
             description={description} 
             addOrUpdateTask={addOrUpdateTask} 
@@ -58,12 +85,39 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
             setEditingTask={setEditingTask} 
             editingTask={editingTask} 
             showForm={showForm} 
-            onSubmit={handleFormSubmit}/>
+            onSubmit={handleFormSubmit}/> */}
 
           {/* Display the task cards */}
-            {toStartTasks.map((task)=>{
-              return( <DisplayCard  key={task.id} task={task}  setEditingTask={setEditingTask} setTitle={setTitle} setDescription={setDescription} setShowForm={setShowForm}/>);
-            })}
+            {/* {toStartTasks.map((task)=>{
+              if(editingTask?.id === task.id ){
+                // Show the form if this task is being edited
+                return( <DisplayCard  
+                  key={task.id} 
+                  task={task}  
+                  setEditingTask={setEditingTask} 
+                  setTitle={setTitle} 
+                  setDescription={setDescription} 
+                  setShowForm={setShowForm} 
+                  setTasks={setTasks}
+                  addOrUpdateTask={addOrUpdateTask}
+                  />
+                );
+              } else {
+                // Show the card if this task is not being edited
+                return( <DisplayCard  
+                  key={task.id} 
+                  task={task}  
+                  setEditingTask={setEditingTask} 
+                  setTitle={setTitle} 
+                  setDescription={setDescription} 
+                  setShowForm={setShowForm} 
+                  setTasks={setTasks}
+                  currentStatus={task.status}
+                  addOrUpdateTask={addOrUpdateTask}
+                  />
+                );
+              }
+            })} */}
         </div>
       </div>
     </>
@@ -71,16 +125,20 @@ export default function ToStart({tasks = [] , addOrUpdateTask , setShowForm , up
 }
 
 // Add prop type validation 
-ToStart.propTypes = {
-  tasks : PropTypes.arrayOf(
-    PropTypes.shape({
-      id : PropTypes.number.isRequired,
-      title : PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      status : PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  showForm: PropTypes.bool.isRequired,
-  addOrUpdateTask : PropTypes.func.isRequired,
-  setShowForm :PropTypes.func.isRequired,
-};
+// ToStart.propTypes = {
+//   // tasks : PropTypes.arrayOf(
+//   //   PropTypes.shape({
+//   //     id : PropTypes.number.isRequired,
+//   //     title : PropTypes.string.isRequired,
+//   //     description: PropTypes.string.isRequired,
+//   //     status : PropTypes.string.isRequired,
+//   //   })
+//   // ).isRequired,
+//   tasks:PropTypes.array.isRequired,
+//   addOrUpdateTask : PropTypes.func.isRequired,
+//   setShowForm :PropTypes.func.isRequired,
+//   updateTaskStatus: PropTypes.func.isRequired,
+//   setTasks: PropTypes.func.isRequired,
+//   editingTask:PropTypes.object,
+//   setEditingTask:PropTypes.func.isRequired,
+// };

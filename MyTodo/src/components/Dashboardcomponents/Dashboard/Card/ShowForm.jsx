@@ -1,19 +1,29 @@
 import styles from "../Card/showform.module.css";
 
-export default function ShowForm({addOrUpdateTask ,setTitle, setDescription , setEditingTask , showForm , editingTask , title , description}) {
+export default function ShowForm({
+  addOrUpdateTask,
+  setTitle,
+  setDescription,
+  title, 
+  description,
+  setShowForm,
+  editingTask,
+  showForm
+  }) {
   
   function handleSubmit(e){
     e.preventDefault();
-    addOrUpdateTask(editingTask?.id,title,description);
+    addOrUpdateTask(editingTask?.id,title,description ,editingTask?.status );
     setTitle("");
     setDescription("");
-    setEditingTask(null); // Reset editing state
+    setShowForm(false);
   }
 
   return (
     <>
-      {showForm && (
-        <div className={styles.formContainer}>
+      {
+        showForm && (
+          <div className={styles.formContainer}>
           <form className={styles.form} onSubmit={handleSubmit}>
 
             <input type="text" placeholder='title' value={title} onChange={(e) => setTitle(e.target.value)} className={styles.inputField}/>
@@ -23,7 +33,10 @@ export default function ShowForm({addOrUpdateTask ,setTitle, setDescription , se
             <button type='submit' className={styles.addButton}>{editingTask ? "Update" : "add Task"}</button>
           </form>
         </div>
-      )}
+        )
+      }
+        
+      
     </>
   )
 }

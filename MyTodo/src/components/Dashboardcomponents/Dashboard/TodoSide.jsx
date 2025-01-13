@@ -7,42 +7,19 @@ import ToStart from './tasks/ToStart';
 import InProgress from './tasks/InProgress';
 import Completed from './tasks/Completed';
 import { useState } from 'react';
+import ShowForm from './Card/ShowForm';
 
 export default function TodoSide() {
-   //set a list of tasks
-  const [tasks, setTasks] = useState([]);
-   // set up a form for adding new tasks
-  const [showForm , setShowForm] = useState(false);
+  
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
 
 
-  // add new task or update
-  function addOrUpdateTask(taskId, title , description){
-    //create newTask object that contains the info of the task
-    if(title && description){
-      if(taskId){
-        //update existing  task
-        setTasks((preTasks)=> preTasks.map((task)=> task.id === taskId ? {...task , title , description} : task));
-      } else {
-        //add new task
-        const newTask = {
-          id: Date.now() , 
-          title,
-          description,
-          status:"To Start", // default status
-          createdAt: new Date().toISOString(), //store the creation Date
-        };
-        //append the  new task to tasks list
-        setTasks([...tasks , newTask]);
-      }
-      setShowForm(false); // hide the form after adding task
-    }
-  }
+ 
 
-  //update task status when dragged to a new column
-  function updateTaskStatus(taskId , newStatus){
-    setTasks((prevTasks)=> prevTasks.map((task) => task.id === taskId ? {...task , status : newStatus} : task));
-  }
+ 
 
   return (
     <>
@@ -66,31 +43,59 @@ export default function TodoSide() {
             <RightPart setShowForm={setShowForm}/>
           </div>
         </div>
+
         <div className={styles.tasks}>
           {/* pass tasks , showForm and addTask to the ToStart component*/}
           <ToStart 
-          key={`toStart-${tasks.filter((task)=> task.status === "To Start").length}`} 
+          key="toStart" 
           tasks={tasks} 
           showForm={showForm} 
           addOrUpdateTask={addOrUpdateTask} 
           setShowForm={setShowForm} 
           updateTaskStatus={updateTaskStatus}
+          setTasks={setTasks}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          title={title}
+          description={description}
           />
 
           <InProgress
-          key={`inProgress-${tasks.filter((task)=> task.status === "in Progress").length}`} 
+          key="inProgress"
           tasks={tasks} 
+          showForm={showForm} 
           addOrUpdateTask={addOrUpdateTask} 
           setShowForm={setShowForm} 
           updateTaskStatus={updateTaskStatus}
+          setTasks={setTasks}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          title={title}
+          description={description}
           />
+
           <Completed 
-          key={`completed-${tasks.filter((task)=> task.status === "Completed").length}`} 
+          key="completed"
           tasks={tasks} 
+          showForm={showForm} 
           addOrUpdateTask={addOrUpdateTask} 
           setShowForm={setShowForm} 
           updateTaskStatus={updateTaskStatus}
+          setTasks={setTasks}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          title={title}
+          description={description}
           />
+
+          
+
         </div>
       </div>
 
