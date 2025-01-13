@@ -8,11 +8,22 @@ import TaskContext from '../../../TaskContext';
 
 
 export default function InProgress() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate ,toDate} = useContext(TaskContext);
 
-  
+
    // filter tasks with status "To Start"
-  const inPogressTasks = tasks? tasks.filter((task)=> task.status === "in Progress" && task.title.toLowerCase().includes(searchTerm.toLowerCase())) : [];
+  const inPogressTasks = tasks? tasks.filter((task)=>{
+    // get the creation task date
+    const taskDate = new Date(task.createdAt).toISOString().split('T')[0];
+    // match based on title for the left part 
+    const matchesTilte = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFromDate = fromDate ? taskDate >= fromDate : true;
+    const matchedToDate = toDate ? taskDate <= toDate : true ;
+
+    return(
+      task.status === "in Progress" && (matchesTilte || (matchesFromDate && matchedToDate))
+    );
+  }): [];
 
    //Handle Drop 
   function handleDrop(e , newStatus){

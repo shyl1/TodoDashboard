@@ -17,6 +17,10 @@ function TaskProvider({children}){
     //add search term for global puropesses
     const [searchTerm , setSearchTerm] = useState("");
 
+    // search by date range
+    const [fromDate , setFromDate] = useState('');
+    const [toDate , setToDate] = useState('');
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
@@ -78,7 +82,11 @@ function TaskProvider({children}){
         setFormColumn,
         deleteTask,
         searchTerm,
-        setSearchTerm
+        setSearchTerm,
+        fromDate,
+        setFromDate,
+        toDate,
+        setToDate
       }}
     >
       {children}
