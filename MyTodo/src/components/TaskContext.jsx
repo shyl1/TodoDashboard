@@ -48,6 +48,11 @@ function TaskProvider({children}){
     setTasks((prevTasks)=> prevTasks.map((task) => task.id === taskId ? {...task , status : newStatus} : task));
   }
 
+  // Delete task
+  function deleteTask(taskId){
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  }
+
 
   return(
     <TaskContext.Provider 
@@ -65,7 +70,8 @@ function TaskProvider({children}){
         description,
         setDescription,
         formColumn,
-        setFormColumn
+        setFormColumn,
+        deleteTask
       }}
     >
       {children}

@@ -26,9 +26,6 @@ export default function Completed() {
       e.preventDefault();
     }
 
-//     console.log("Show Form:", showForm); // Debugging line
-//  console.log("Form Column:", formColumn); // Debugging line
-// console.log("Editing Task:", editingTask); // Debugging line
   
   return (
     <>
@@ -63,13 +60,3 @@ export default function Completed() {
   )
 }
 
-// // Add prop type validation 
-// Completed.propTypes = {
-//   tasks:PropTypes.array.isRequired,
-//   addOrUpdateTask : PropTypes.func.isRequired,
-//   setShowForm :PropTypes.func.isRequired,
-//   updateTaskStatus: PropTypes.func.isRequired,
-//   setTasks: PropTypes.func.isRequired,
-//   editingTask:PropTypes.object,
-//   setEditingTask:PropTypes.func.isRequired,
-// };

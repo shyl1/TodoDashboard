@@ -4,15 +4,7 @@ import { RiEditLine } from "react-icons/ri";
 import TaskContext from '../../../TaskContext';
 
 export default function DisplayCard({task}) {
-  const {setEditingTask , setTitle , setDescription , setShowForm , setFormColumn } = useContext(TaskContext);
-
-  // console.log('setEditingTask:', setEditingTask); // Debugging line
-  // console.log('setTitle:', setTitle); // Debugging line
-  // console.log('setDescription:', setDescription); // Debugging line
-  console.log('setShowForm:', setShowForm); // Debugging line
-
-
-
+  const {setEditingTask , setTitle , setDescription , setShowForm , setFormColumn  , deleteTask} = useContext(TaskContext);
 
   //drop down menu
   const [isDrodownOpen , setIsDropdownOpen] = useState(false);
@@ -32,6 +24,11 @@ export default function DisplayCard({task}) {
     setIsDropdownOpen(false);
   }
 
+  // Delete Functionality
+  function handleDeleteClick(task){
+    deleteTask(task.id);
+  }
+
 
   return (
     <>
@@ -44,6 +41,7 @@ export default function DisplayCard({task}) {
               {isDrodownOpen && (
                 <div className={styles.edit}>
                 <button className={styles.btn} onClick={()=>handleEditClick(task)}>Edit</button>
+                <button className={styles.btn} onClick={()=>handleDeleteClick(task)}>Delete</button>
               </div>
               )}
           </div>
