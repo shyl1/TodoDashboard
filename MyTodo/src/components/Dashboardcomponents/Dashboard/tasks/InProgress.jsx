@@ -8,7 +8,7 @@ import TaskContext from '../../../TaskContext';
 
 
 export default function InProgress() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate ,toDate} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate ,toDate ,setFormColumn,setShowForm } = useContext(TaskContext);
 
 
    // filter tasks with status "To Start"
@@ -21,7 +21,7 @@ export default function InProgress() {
     const matchedToDate = toDate ? taskDate <= toDate : true ;
 
     return(
-      task.status === "in Progress" && (matchesTilte || (matchesFromDate && matchedToDate))
+      task.status === "in Progress" && matchesTilte && matchesFromDate && matchedToDate
     );
   }): [];
 
@@ -35,6 +35,11 @@ export default function InProgress() {
   //allow Drop
   function handleDragOver(e){
     e.preventDefault();
+  }
+
+  function handleAddNewTask(){
+    setShowForm(true);
+    setFormColumn('in Progress');
   }
 
 
@@ -71,6 +76,13 @@ export default function InProgress() {
             {
               inPogressTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
             }
+
+             {/* Display "Add New Task" button if there are at least one task */}
+              {
+                inPogressTasks.length >= 1 && (
+                  <button className={styles.addtask} onClick={handleAddNewTask}>Add New</button>
+                )
+              }
         </div>
       </div>
     </>

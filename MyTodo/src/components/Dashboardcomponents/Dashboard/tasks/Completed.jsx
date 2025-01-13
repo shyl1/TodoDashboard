@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import TaskContext from '../../../TaskContext';
 
 export default function Completed() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , toDate ,fromDate} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , toDate ,fromDate ,setFormColumn ,setShowForm} = useContext(TaskContext);
 
 
   // filter tasks with status "To Start"
@@ -19,7 +19,7 @@ export default function Completed() {
     const matchedToDate = toDate ? taskDate <= toDate : true ;
 
     return(
-      task.status === "Completed" && (matchesTilte || (matchesFromDate && matchedToDate))
+      task.status === "Completed" && matchesTilte && matchesFromDate && matchedToDate
     );
   }): [];
   
@@ -35,6 +35,10 @@ export default function Completed() {
       e.preventDefault();
     }
 
+    function handleAddNewTask(){
+      setShowForm(true);
+      setFormColumn('Completed');
+    }
   
   return (
     <>
@@ -62,6 +66,12 @@ export default function Completed() {
 
           {
             completedTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
+          }
+          {/* Display "Add New Task" button if there are at least one task */}
+          {
+            completedTasks.length >= 1 && (
+              <button className={styles.addtask} onClick={handleAddNewTask}>Add New</button>
+            )
           }
           </div>
       </div>

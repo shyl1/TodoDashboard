@@ -7,7 +7,7 @@ import TaskContext from '../../../TaskContext';
 
 export default function ToStart() {
 
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate, toDate} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate, toDate , setShowForm , setFormColumn} = useContext(TaskContext);
 
    // filter tasks with status "To Start"
   const toStartTasks = tasks? tasks.filter((task)=>{
@@ -19,7 +19,7 @@ export default function ToStart() {
     const matchedToDate = toDate ? taskDate <= toDate : true ;
 
     return(
-      task.status === "To Start" && (matchesTilte || (matchesFromDate && matchedToDate))
+      task.status === "To Start" && matchesTilte && matchesFromDate && matchedToDate
     );
   }): [];
 
@@ -35,6 +35,13 @@ export default function ToStart() {
   function handleDragOver(e){
     e.preventDefault();
   }
+
+  function handleAddNewTask(){
+    setShowForm(true);
+    setFormColumn('To Start');
+  }
+
+
 
   return (
     <>
@@ -65,7 +72,13 @@ export default function ToStart() {
           {
             toStartTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
           }
-
+          
+           {/* Display "Add New Task" button if there are at least one task */}
+            {
+              toStartTasks.length >= 1 && (
+                <button className={styles.addtask} onClick={handleAddNewTask}>Add New</button>
+              )
+            }
         </div>
       </div>
     </>

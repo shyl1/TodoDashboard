@@ -1,10 +1,13 @@
-import { createContext  , useState} from "react";
+import { createContext  , useEffect, useState} from "react";
 
 const TaskContext = createContext();
 
 function TaskProvider({children}){
   //set a list of tasks
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(() => {
+      const savedTasks = localStorage.getItem('tasks');
+      return savedTasks ? JSON.parse(savedTasks) : [];
+    });
 
      // set up a form for adding new tasks
     const [showForm , setShowForm] = useState(false); // controls new task form
@@ -25,7 +28,10 @@ function TaskProvider({children}){
     const [description, setDescription] = useState('');
 
 
-
+    // save tasks to LoccalStoarge whenever takes change
+    useEffect(()=>{
+      localStorage.setItem('tasks' , JSON.stringify(tasks))
+    }, [tasks]);
     
   // add new task or update
     function addOrUpdateTask(taskId, title , description , currentStatus){
