@@ -1,8 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from '../../dashboardStyling/tasksStyling/tostart.module.css';
 import { RiEditLine } from "react-icons/ri";
+import TaskContext from '../../../TaskContext';
 
-export default function DisplayCard({task , setEditingTask , setTitle , setDescription , setShowForm  }) {
+export default function DisplayCard({task}) {
+  const {setEditingTask , setTitle , setDescription , setShowForm , setFormColumn } = useContext(TaskContext);
+
+  // console.log('setEditingTask:', setEditingTask); // Debugging line
+  // console.log('setTitle:', setTitle); // Debugging line
+  // console.log('setDescription:', setDescription); // Debugging line
+  console.log('setShowForm:', setShowForm); // Debugging line
+
+
+
+
   //drop down menu
   const [isDrodownOpen , setIsDropdownOpen] = useState(false);
 
@@ -16,6 +27,7 @@ export default function DisplayCard({task , setEditingTask , setTitle , setDescr
     setEditingTask(task); //set the task that is being edited
     setTitle(task.title); // set the new title
     setDescription(task.description); // new or edited desc
+    setFormColumn(task.status);
     setShowForm(true);
     setIsDropdownOpen(false);
   }

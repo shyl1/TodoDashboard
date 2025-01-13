@@ -6,20 +6,11 @@ import RightPart from './RightPart';
 import ToStart from './tasks/ToStart';
 import InProgress from './tasks/InProgress';
 import Completed from './tasks/Completed';
-import { useState } from 'react';
-import ShowForm from './Card/ShowForm';
 
 export default function TodoSide() {
   
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
 
-
-
- 
-
- 
 
   return (
     <>
@@ -40,65 +31,32 @@ export default function TodoSide() {
             <LeftPart />
           </div>
           <div>
-            <RightPart setShowForm={setShowForm}/>
+            {/* <RightPart setShowForm={setShowForm}/> */}
+            <RightPart/>
           </div>
         </div>
 
         <div className={styles.tasks}>
-          {/* pass tasks , showForm and addTask to the ToStart component*/}
-          <ToStart 
-          key="toStart" 
-          tasks={tasks} 
-          showForm={showForm} 
-          addOrUpdateTask={addOrUpdateTask} 
-          setShowForm={setShowForm} 
-          updateTaskStatus={updateTaskStatus}
-          setTasks={setTasks}
-          editingTask={editingTask}
-          setEditingTask={setEditingTask}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          title={title}
-          description={description}
-          />
-
-          <InProgress
-          key="inProgress"
-          tasks={tasks} 
-          showForm={showForm} 
-          addOrUpdateTask={addOrUpdateTask} 
-          setShowForm={setShowForm} 
-          updateTaskStatus={updateTaskStatus}
-          setTasks={setTasks}
-          editingTask={editingTask}
-          setEditingTask={setEditingTask}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          title={title}
-          description={description}
-          />
-
-          <Completed 
-          key="completed"
-          tasks={tasks} 
-          showForm={showForm} 
-          addOrUpdateTask={addOrUpdateTask} 
-          setShowForm={setShowForm} 
-          updateTaskStatus={updateTaskStatus}
-          setTasks={setTasks}
-          editingTask={editingTask}
-          setEditingTask={setEditingTask}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          title={title}
-          description={description}
-          />
-
-          
-
+          <ToStart />
+          <InProgress />
+          <Completed />
         </div>
       </div>
-
     </>
   )
 }
+
+
+// key="toStart" 
+// tasks={tasks} 
+// showForm={showForm} 
+// addOrUpdateTask={addOrUpdateTask} 
+// setShowForm={setShowForm} 
+// updateTaskStatus={updateTaskStatus}
+// setTasks={setTasks}
+// editingTask={editingTask}
+// setEditingTask={setEditingTask}
+// setTitle={setTitle}
+// setDescription={setDescription}
+// title={title}
+// description={description}

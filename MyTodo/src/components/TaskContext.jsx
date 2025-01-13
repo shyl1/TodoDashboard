@@ -10,6 +10,12 @@ function TaskProvider({children}){
     // tark the task that is being edited
     const [editingTask , setEditingTask] = useState(null); // controls editing form
 
+    const [formColumn, setFormColumn] = useState(null); // Track which column should show the form
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+
+
 
     
   // add new task or update
@@ -18,7 +24,7 @@ function TaskProvider({children}){
         if(title && description){
           if(taskId){
             //update existing  task
-            setTasks((preTasks)=> preTasks.map((task)=> task.id === taskId ? {...task , title , description} : task));
+            setTasks((preTasks)=> preTasks.map((task)=> task.id === taskId ? {...task , title , description , status : currentStatus} : task));
           } else {
             //add new task
             const newTask = {
@@ -33,6 +39,7 @@ function TaskProvider({children}){
           }
           setShowForm(false); // hide the form after adding task
           setEditingTask(null);
+          setFormColumn(null); // Reset form column after submission
         }
       }
 
@@ -53,6 +60,12 @@ function TaskProvider({children}){
         setShowForm,
         addOrUpdateTask,
         updateTaskStatus,
+        title,
+        setTitle,
+        description,
+        setDescription,
+        formColumn,
+        setFormColumn
       }}
     >
       {children}
@@ -60,4 +73,5 @@ function TaskProvider({children}){
   );
 }
 
-export {TaskProvider , TaskContext}
+export { TaskProvider };
+export default TaskContext; // Default export

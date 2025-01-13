@@ -3,20 +3,11 @@ import styles from '../../dashboardStyling/tasksStyling/completed.module.css';
 import { FaCircle } from "react-icons/fa";
 import ShowForm from '../Card/ShowForm';
 import DisplayCard from '../Card/DisplayCard';
+import { useContext } from 'react';
+import TaskContext from '../../../TaskContext';
 
-export default function Completed({tasks = [] ,
-  showForm,
-  addOrUpdateTask,
-  setShowForm,
-  updateTaskStatus,
-  setTasks,
-  editingTask,
-  setEditingTask,
-  setTitle,
-  setDescription,
-  title,
-  description
-}) {
+export default function Completed() {
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus} = useContext(TaskContext);
 
 
     
@@ -35,6 +26,9 @@ export default function Completed({tasks = [] ,
       e.preventDefault();
     }
 
+//     console.log("Show Form:", showForm); // Debugging line
+//  console.log("Form Column:", formColumn); // Debugging line
+// console.log("Editing Task:", editingTask); // Debugging line
   
   return (
     <>
@@ -42,31 +36,27 @@ export default function Completed({tasks = [] ,
         <h3 className={styles.text}><FaCircle className={styles.circleIcon}/>Completed</h3>
 
         <div className={styles.innerContainer} onDrop={(e)=> handleDrop(e , "Completed")} onDragOver={handleDragOver}>
-        {
-          completedTasks.map((task) => {
-            if(editingTask?.id === task.id){
-              return (
-                <ShowForm 
-                  key={task.id}
-                  addOrUpdateTask={addOrUpdateTask}
-                  setTitle={setTitle}
-                  setDescription={setDescription}
-                  setShowForm={setShowForm}
-                  title={title}
-                  description={description}
-                /> 
-              );
-            } else {
-              <DisplayCard 
-              key={task.id} 
-              task={task}  
-              setEditingTask={setEditingTask} 
-              setShowForm={setShowForm}
-              addOrUpdateTask={addOrUpdateTask}
-              />
+
+          {
+              showForm &&  formColumn=== "Completed" && (
+                <ShowForm
+                  onSubmit={(title, description) =>
+                    addOrUpdateTask(
+                      editingTask?.id, // Pass the task ID if editing, otherwise null
+                      title,
+                      description,
+                      "Completed" // Preserve the status as "Completed"
+                    )
+                  }
+                  initialTitle={editingTask ? editingTask.title : ""}
+                  initialDescription={editingTask ? editingTask.description : ""}
+                />
+              )
             }
-          })
-        } 
+
+          {
+            completedTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
+          }
           </div>
       </div>
     </>

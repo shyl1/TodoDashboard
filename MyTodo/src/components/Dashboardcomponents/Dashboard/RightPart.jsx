@@ -1,13 +1,18 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styles from '../dashboardStyling/rightpart.module.css';
 import { CiCirclePlus } from "react-icons/ci";
+import { useContext } from 'react';
+import TaskContext from '../../TaskContext';
 
 
-export default function RightPart({setShowForm}) {
+export default function RightPart() {
+  
+  const {setShowForm , setFormColumn} = useContext(TaskContext);
 
  // function to handle clicking on the newtask button
     function handleClick(e){
       e.preventDefault();
+      setFormColumn("To Start");
       setShowForm(true); // show the form when the button is clicked
     }
   
@@ -30,7 +35,7 @@ export default function RightPart({setShowForm}) {
   )
 }
 
-// Add prop type validation
-RightPart.propTypes = {
-  setShowForm: PropTypes.func.isRequired,
-};
+// // Add prop type validation
+// RightPart.propTypes = {
+//   setShowForm: PropTypes.func.isRequired,
+// };
