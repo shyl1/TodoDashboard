@@ -8,11 +8,11 @@ import TaskContext from '../../../TaskContext';
 
 
 export default function InProgress() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm} = useContext(TaskContext);
 
   
    // filter tasks with status "To Start"
-  const inPogressTasks = tasks? tasks.filter((task)=> task.status === "in Progress") : [];
+  const inPogressTasks = tasks? tasks.filter((task)=> task.status === "in Progress" && task.title.toLowerCase().includes(searchTerm.toLowerCase())) : [];
 
    //Handle Drop 
   function handleDrop(e , newStatus){

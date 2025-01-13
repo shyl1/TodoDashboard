@@ -5,12 +5,17 @@ const TaskContext = createContext();
 function TaskProvider({children}){
   //set a list of tasks
     const [tasks, setTasks] = useState([]);
+
      // set up a form for adding new tasks
-    const [showForm , setShowForm] = useState(false); // controls new task form 
+    const [showForm , setShowForm] = useState(false); // controls new task form
+  
     // tark the task that is being edited
     const [editingTask , setEditingTask] = useState(null); // controls editing form
 
     const [formColumn, setFormColumn] = useState(null); // Track which column should show the form
+
+    //add search term for global puropesses
+    const [searchTerm , setSearchTerm] = useState("");
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -71,7 +76,9 @@ function TaskProvider({children}){
         setDescription,
         formColumn,
         setFormColumn,
-        deleteTask
+        deleteTask,
+        searchTerm,
+        setSearchTerm
       }}
     >
       {children}

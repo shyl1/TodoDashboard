@@ -1,4 +1,3 @@
-//import PropTypes from 'prop-types';
 import styles from '../../dashboardStyling/tasksStyling/completed.module.css';
 import { FaCircle } from "react-icons/fa";
 import ShowForm from '../Card/ShowForm';
@@ -7,12 +6,12 @@ import { useContext } from 'react';
 import TaskContext from '../../../TaskContext';
 
 export default function Completed() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm} = useContext(TaskContext);
 
 
     
      // filter tasks with status "To Start"
-    const completedTasks = tasks? tasks.filter((task)=> task.status === "Completed") : [];
+    const completedTasks = tasks? tasks.filter((task)=> task.status === "Completed" && task.title.toLowerCase().includes(searchTerm.toLowerCase())) : [];
   
      //Handle Drop 
     function handleDrop(e , newStatus){

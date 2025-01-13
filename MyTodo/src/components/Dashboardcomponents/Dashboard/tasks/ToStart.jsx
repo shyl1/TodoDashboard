@@ -1,4 +1,3 @@
-//import PropTypes from 'prop-types';
 import styles from '../../dashboardStyling/tasksStyling/tostart.module.css';
 import { FaCircle } from "react-icons/fa";
 import ShowForm from '../Card/ShowForm';
@@ -8,10 +7,12 @@ import TaskContext from '../../../TaskContext';
 
 export default function ToStart() {
 
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm} = useContext(TaskContext);
 
    // filter tasks with status "To Start"
-  const toStartTasks = tasks? tasks.filter((task)=> task.status === "To Start") : [];
+  const toStartTasks = tasks? tasks.filter((task)=> task.status === "To Start" && task.title.toLowerCase().includes(searchTerm.toLowerCase())) : [];
+
+
 
   
 

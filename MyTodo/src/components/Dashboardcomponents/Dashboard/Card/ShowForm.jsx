@@ -2,7 +2,7 @@ import { useState , useEffect, useContext } from "react";
 import styles from "../Card/showform.module.css";
 import TaskContext from "../../../TaskContext";
 
-export default function ShowForm({onSubmit , initialTitle="" ,initialDescription="" }) {
+export default function ShowForm({onSubmit , initialTitle = "" ,initialDescription = "" }) {
 
   const {editingTask} = useContext(TaskContext);
   
