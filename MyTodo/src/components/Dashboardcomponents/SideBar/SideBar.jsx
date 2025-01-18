@@ -1,5 +1,5 @@
 import { FaBorderAll } from "react-icons/fa";
-import styles from '../dashboardStyling/sideBar.module.css';
+import styles from './sideBar.module.css';
 
 export default function SideBar() {
   return (

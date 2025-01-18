@@ -1,4 +1,4 @@
-import styles from '../dashboardStyling/rightpart.module.css';
+import styles from './rightpart.module.css';
 import { CiCirclePlus } from "react-icons/ci";
 import { useContext } from 'react';
 import TaskContext from '../../TaskContext';

@@ -1,17 +1,13 @@
-import styles from '../dashboardStyling/todoSide.module.css';
+import styles from './todoSide.module.css';
 import { FcTodoList } from "react-icons/fc";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import LeftPart from './LeftPart';
-import RightPart from './RightPart';
-import ToStart from './tasks/ToStart';
-import InProgress from './tasks/InProgress';
-import Completed from './tasks/Completed';
+import LeftPart from '../LeftPart/LeftPart.jsx';
+import RightPart from '../RightPart/RightPart.jsx';
+import ToStart from '../Dashboard/tasks/ToStart.jsx';
+import InProgress from '../Dashboard/tasks/InProgress.jsx';
+import Completed from '../Dashboard/tasks/Completed.jsx';
 
 export default function TodoSide() {
-  
-
-
-
   return (
     <>
       <div className={styles.todoContainer}>
@@ -31,7 +27,6 @@ export default function TodoSide() {
             <LeftPart />
           </div>
           <div>
-            {/* <RightPart setShowForm={setShowForm}/> */}
             <RightPart/>
           </div>
         </div>
@@ -45,18 +40,3 @@ export default function TodoSide() {
     </>
   )
 }
-
-
-// key="toStart" 
-// tasks={tasks} 
-// showForm={showForm} 
-// addOrUpdateTask={addOrUpdateTask} 
-// setShowForm={setShowForm} 
-// updateTaskStatus={updateTaskStatus}
-// setTasks={setTasks}
-// editingTask={editingTask}
-// setEditingTask={setEditingTask}
-// setTitle={setTitle}
-// setDescription={setDescription}
-// title={title}
-// description={description}

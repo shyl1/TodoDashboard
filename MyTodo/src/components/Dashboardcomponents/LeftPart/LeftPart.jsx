@@ -1,5 +1,5 @@
 import { CiSearch } from "react-icons/ci";
-import styles from'../dashboardStyling/leftpart.module.css';
+import styles from'./leftpart.module.css';
 import { useContext } from "react";
 import TaskContext from "../../TaskContext";
 
