@@ -5,7 +5,8 @@ import './App.css';
 import DashBoard from './components/Dashboardcomponents/Dashboard/DashBoard.jsx';
 import SignUp from './components/SignUp/SignUpComonents/SignUp.jsx';
 import { ProtectedRoutes } from './utils/ProtectedRoutes.jsx';
-import Profile from './components/Dashboardcomponents/Profile/Profile.jsx'
+import DashboardLayout from './components/Dashboardcomponents/Dashboard/DashboardLayout/DashboardLayout.jsx';
+import Profile from './components/Dashboardcomponents/Dashboard/Profile/Profile.jsx';
 
 
 function App() {
@@ -19,8 +20,11 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route element={<ProtectedRoutes/>}>
-          <Route path='/dashboard' element={<DashBoard/>}/>
-          <Route path='profile' element={<Profile/>} />
+          <Route path='/dashboard' element={<DashboardLayout />}>
+            <Route index element={<DashBoard/>}/>
+            <Route path='profile' element={<Profile/>}/>
+
+          </Route>
         </Route>
       </Routes>
       </BrowserRouter>

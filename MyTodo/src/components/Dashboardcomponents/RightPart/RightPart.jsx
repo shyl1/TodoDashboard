@@ -2,16 +2,10 @@ import styles from './rightpart.module.css';
 import { CiCirclePlus } from "react-icons/ci";
 import { useContext } from 'react';
 import TaskContext from '../../TaskContext';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export default function RightPart() {
-
-  const navigate = useNavigate();
-
-  function handleProfileClick(){
-    navigate("/profile");
-  }
 
   
   const {setShowForm , setFormColumn , fromDate , setFromDate , toDate , setToDate} = useContext(TaskContext);
@@ -26,8 +20,11 @@ export default function RightPart() {
   return (
     <>
     <div className={styles.topContainer}>
-      <button type='submit' className={styles.btn} onClick={handleClick}><CiCirclePlus />New Task</button>
-      <div className={styles.profile} onClick={handleProfileClick}></div>
+      <button type='submit' className={styles.btn} onClick={handleClick}><CiCirclePlus className={styles.cri}/>New Task</button>
+      <Link to="/dashboard/profile">
+      <div className={styles.profile}></div>
+      </Link>
+      
     </div>
     <div className={styles.bottomContainer}>
     <div className={styles.dateTo}>
