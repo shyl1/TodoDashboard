@@ -1,8 +1,9 @@
 .Container{
   width: 100%;
-  margin: 130px auto;
+  margin: 300px auto;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .LoginContainer{

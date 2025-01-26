@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import styles from '../SignUpStyling/signup.module.css';
 
 
-import { AuthContext } from '../../AuthenticationContext';
+import  AuthContext  from '../../AuthenticationContext';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 //improting components
 import UserName from "./UserName";
@@ -13,11 +13,11 @@ import Email from '../../sharedComponents/Email';
 import Password from '../../sharedComponents/Password';
 import ButtonSignUp from './ButtonSignUp';
 import SignUpWithGoogle from './SignUpWithGoogle.jsx';
-import Checkbox from './Checkbox.jsx';
 
 
 export default function SignUp() {
-  const {validateEmail , validatePassword , login ,setHasAttempted}= useContext(AuthContext);
+  const {validateEmail , validatePassword  ,setHasAttempted , storeUserData}= useContext(AuthContext);
+
 
   const navigate = useNavigate();
   //handling email validation 
@@ -32,9 +32,9 @@ export default function SignUp() {
   //username 
   const [username , setUserName] =useState('');
   const [isUsernameValid, setIsUsernameValid] = useState(true);
-  //checkbox
-  const [isChecked, setIsChecked] = useState(false);
-  const [error, setError] = useState('');
+
+
+
 
   // Validate username (example: non-empty)
   function validateUsername(username){
@@ -44,32 +44,26 @@ export default function SignUp() {
   function handleSubmit(e){
     e.preventDefault();
     setHasAttempted(true);
+
+    //validate inputs
     const isValidUsername = validateUsername(username);
     const isValidEmail =validateEmail(email);
     const isValidPassword = validatePassword(password);
 
     setIsUsernameValid(isValidUsername);
-    setIsEmailValid(isValidEmail);
-    setIsPasswordValid(isValidPassword);
-    if(!isChecked){
-      setError('Please check the checkbox to proceed.'); // Set error message
-      //console.log('Form submission prevented: Checkbox is unchecked'); // Debuggings
-      return; // Stop form submission
-    } else {
-      setError(''); // Clear error message
-      //console.log('Form submitted!');
-    }
+    setIsEmailValid(!isValidEmail);
+    setIsPasswordValid(!isValidPassword);
 
-    if(isValidEmail && isValidPassword && isValidUsername){
-      login(); // Set authentication state
-      navigate("/dashboard");
-    }
+    
+
+    // If all inputs are valid, store user data and redirect to login
+    if(!isValidEmail && !isValidPassword && isValidUsername){
+      storeUserData(email , password ,username); // Store user data
+      navigate("/"); // Redirect to login page
+    } 
   };
   
 
-  function handleClick(){
-    navigate("/dashboard");
-  }
   function handleClickToLogin(){
     navigate('/');
   }
@@ -90,11 +84,8 @@ export default function SignUp() {
         <div className={styles.passwordContainer}>
           <Password password={password} setPassword={setPassword} isPasswordValid={isPasswordValid}/>
         </div>
-        <div className={styles.checkContainer}>
-          <Checkbox isChecked={isChecked} setIsChecked={setIsChecked} error={error} />
-        </div>
         <div className={styles.btnContainer}>
-          <ButtonSignUp type="submit" onClick={handleClick}/>
+          <ButtonSignUp type="submit" />
         </div>
         <div className={styles.OR}>
           OR

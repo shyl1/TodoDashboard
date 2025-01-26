@@ -1,12 +1,28 @@
-import { createContext  , useEffect, useState} from "react";
+import { createContext  , useEffect, useState , useMemo, useContext} from "react";
+import UserContext from "./UserContext";
 
 const TaskContext = createContext();
 
+
+
 function TaskProvider({children}){
+
+  const {user , getUserTasks , saveUserTask } =useContext(UserContext);
+
+  // changes are instead to make tasks globally , make it for each user has their own localStoarge tasks
   //set a list of tasks
     const [tasks, setTasks] = useState(() => {
-      const savedTasks = localStorage.getItem('tasks');
-      return savedTasks ? JSON.parse(savedTasks) : [];
+      if(user.email){
+        return getUserTasks(user.email);
+      }
+    //   //load the tasks from localStorage for the current user
+    //   if (user.email){
+    //     const userTasksKey = `tasks_${user.email}`;
+    //     const savedTasks = localStorage.getItem(userTasksKey);
+    //     return savedTasks ? JSON.parse(savedTasks) : [];
+    //   }
+      return [];
+    //  // const savedTasks = localStorage.getItem('tasks');
     });
 
      // set up a form for adding new tasks
@@ -28,10 +44,24 @@ function TaskProvider({children}){
     const [description, setDescription] = useState('');
 
 
-    // save tasks to LoccalStoarge whenever takes change
+    // // save tasks to LoccalStoarge whenever takes change
+    // useEffect(()=>{
+    //   localStorage.setItem('tasks' , JSON.stringify(tasks));
+    // }, [tasks]);
+
+    //modifing saving to localStorage code
     useEffect(()=>{
-      localStorage.setItem('tasks' , JSON.stringify(tasks))
-    }, [tasks]);
+      if(user.email){
+        saveUserTask(user.email , tasks)
+      }
+      }, [tasks , user.email]);
+
+      useEffect(()=>{
+        const userTasks = getUserTasks(user.email);
+        setTasks(userTasks);
+      }, [user.email])
+
+
     
   // add new task or update
     function addOrUpdateTask(taskId, title , description , currentStatus){
@@ -68,6 +98,23 @@ function TaskProvider({children}){
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   }
 
+  // Memoize task counts to avoid recalculating on every render
+    const ToStartCounts = useMemo( () => {
+      const count = tasks ? tasks.filter((task) => task.status === "To Start").length : 0;
+    return count;
+    }, [tasks]);
+  
+  
+    const InProgressCounts = useMemo( () => {
+      const count = tasks ? tasks.filter((task) => task.status === "in Progress").length : 0;
+      return count;
+    }, [tasks]);
+  
+    const CompletedCounts = useMemo( () => {
+      const count = tasks ? tasks.filter((task) => task.status === "Completed").length : 0;
+      return count;
+    }, [tasks]);
+
 
   return(
     <TaskContext.Provider 
@@ -92,7 +139,10 @@ function TaskProvider({children}){
         fromDate,
         setFromDate,
         toDate,
-        setToDate
+        setToDate,
+        ToStartCounts,
+        InProgressCounts,
+        CompletedCounts
       }}
     >
       {children}

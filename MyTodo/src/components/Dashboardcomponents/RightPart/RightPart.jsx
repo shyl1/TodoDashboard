@@ -20,7 +20,14 @@ export default function RightPart() {
   return (
     <>
     <div className={styles.topContainer}>
-      <button type='submit' className={styles.btn} onClick={handleClick}><CiCirclePlus className={styles.cri}/>New Task</button>
+
+      <button type='submit' 
+      className={styles.btn} 
+      onClick={handleClick}>
+        <CiCirclePlus className={styles.cri}/>
+        New Task
+      </button>
+
       <Link to="/dashboard/profile">
       <div className={styles.profile}></div>
       </Link>
