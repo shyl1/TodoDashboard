@@ -7,7 +7,7 @@ import TaskContext from '../../../TaskContext';
 
 export default function ToStart() {
 
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate, toDate , setShowForm , setFormColumn} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate, toDate , setShowForm , setFormColumn , formRef} = useContext(TaskContext);
 
    // filter tasks with status "To Start"
   const toStartTasks = tasks? tasks.filter((task)=>{
@@ -57,15 +57,17 @@ export default function ToStart() {
 
           {
             showForm && formColumn === "To Start" && (
-              <ShowForm 
-              onSubmit={(title , description) => 
-                addOrUpdateTask(editingTask?.id ,
-                  title ,
-                  description ,
-                  editingTask?.status || "To Start")}
-                  initialTitle={editingTask ? editingTask.title : ""}
-                  initialDescription={editingTask ? editingTask.description : ""}
-                  />
+              <div ref={formRef}>
+                <ShowForm 
+                onSubmit={(title , description) => 
+                  addOrUpdateTask(editingTask?.id ,
+                    title ,
+                    description ,
+                    editingTask?.status || "To Start")}
+                    initialTitle={editingTask ? editingTask.title : ""}
+                    initialDescription={editingTask ? editingTask.description : ""}
+                    />
+              </div>
             )
           }
 

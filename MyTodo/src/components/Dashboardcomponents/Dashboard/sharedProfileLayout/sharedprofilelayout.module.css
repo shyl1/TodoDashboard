@@ -8,7 +8,7 @@
 }
 
 .outerContainer h3{
-  font-size: 25px;
+  font-size: 35px;
   padding: 30px;
 }
 
@@ -46,7 +46,6 @@
   border-radius: 50%;
 }
 
-
 .cards{
   width: 50%;
   display: flex;
@@ -63,8 +62,7 @@
   flex-direction: column;
 }
 
-.textS{
-  border: 5px solid #17A2B8;
+.textS ,.textI ,  .textC {
   padding: 50px;
   display: flex;
   justify-content: center;
@@ -72,30 +70,21 @@
   font-size: 35px;
   font-weight: bold;
   border-radius: 15px;
+}
+
+
+.textS{
+  border: 5px solid #17A2B8;
   background-color: #57ccdeb4;
 }
 
 .textI{
   border: 5px solid #FFC107;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-weight: bold;
-  border-radius: 15px;
   background-color: #fadf8d;
 }
 
 .textC{
   border: 5px solid #8BC34A;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-weight: bold;
-  border-radius: 15px;
   background-color: #b5e37f;
 }
 
@@ -150,4 +139,37 @@
   background-color: transparent;
   cursor: pointer;
   font-weight: 600;
+}
+
+
+@media (max-width: 1409px) {
+  .outerContainer h3{
+    font-size: 25px;
+    padding: 30px;
+  }
+
+  .picWidth{
+    width: 300px;
+  }
+  
+  .picWidth h2{
+    font-size: 20px;
+  }
+  
+  .pic{
+    width:200px;
+  }
+  
+  .pic img{
+    width: 200px;
+  }
+
+  .cards{
+    gap: 30px;
+  }
+  
+  .content span {
+    font-size: 18px;
+  }
+
 }

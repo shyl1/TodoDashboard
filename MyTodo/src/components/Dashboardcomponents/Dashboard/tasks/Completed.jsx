@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import TaskContext from '../../../TaskContext';
 
 export default function Completed() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , toDate ,fromDate ,setFormColumn ,setShowForm} = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , toDate ,fromDate ,setFormColumn ,setShowForm , formRef} = useContext(TaskContext);
 
 
   // filter tasks with status "To Start"
@@ -49,18 +49,20 @@ export default function Completed() {
 
           {
               showForm &&  formColumn=== "Completed" && (
-                <ShowForm
-                  onSubmit={(title, description) =>
-                    addOrUpdateTask(
-                      editingTask?.id, // Pass the task ID if editing, otherwise null
-                      title,
-                      description,
-                      "Completed" // Preserve the status as "Completed"
-                    )
-                  }
-                  initialTitle={editingTask ? editingTask.title : ""}
-                  initialDescription={editingTask ? editingTask.description : ""}
-                />
+                <div ref={formRef}>
+                  <ShowForm
+                    onSubmit={(title, description) =>
+                      addOrUpdateTask(
+                        editingTask?.id, // Pass the task ID if editing, otherwise null
+                        title,
+                        description,
+                        "Completed" // Preserve the status as "Completed"
+                      )
+                    }
+                    initialTitle={editingTask ? editingTask.title : ""}
+                    initialDescription={editingTask ? editingTask.description : ""}
+                  />
+                </div>
               )
             }
 

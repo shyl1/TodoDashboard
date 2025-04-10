@@ -6,8 +6,8 @@
 }
 
 .profile{
-  width: 80px;
-  height: 80px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   background-image: url('../../../../public/images/download\ \(2\).png');
   background-size: cover;
@@ -20,8 +20,8 @@
   outline: none;
   margin-right: 20px;
   padding: 5px;
-  width: 200px;
-  height: 80px;
+  width: 150px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,9 +30,10 @@
   background-color: #202D48;
   color: white;
   gap: 10px;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
 }
+
 .cri{
   font-size: 40px;
 }
@@ -46,9 +47,9 @@
 .from , .to{
   outline: none;
   padding: 10px;
-  width: 300px;
-  min-width: 150px;
-  height: 50px;
+  width: 200px;
+  min-width: 100px;
+  height: 40px;
   border-radius: 5px;
   border: 1px solid #9D9D9F;
 }

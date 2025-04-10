@@ -1,4 +1,4 @@
-import { createContext  , useEffect, useState , useMemo, useContext} from "react";
+import { createContext  , useEffect, useState , useMemo, useContext, useRef} from "react";
 import UserContext from "./UserContext";
 
 const TaskContext = createContext();
@@ -8,6 +8,9 @@ const TaskContext = createContext();
 function TaskProvider({children}){
 
   const {user , getUserTasks , saveUserTask } =useContext(UserContext);
+
+  //ref for the form container
+  const formRef = useRef(null);
 
   // changes are instead to make tasks globally , make it for each user has their own localStoarge tasks
   //set a list of tasks
@@ -42,6 +45,26 @@ function TaskProvider({children}){
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+
+    // handling the click outside of the form to close it
+    useEffect(()=> {
+      const handleClickOutside = (event)=> {
+        if (formRef.current && !formRef.current.contains(event.target)){
+          setShowForm(false); // Close the form if clicked outside
+          setEditingTask(null); // Reset editing task
+          setFormColumn(null); // Reset form column
+        }
+      }
+
+      if(showForm) {
+        document.addEventListener('mousedown' , handleClickOutside);
+      }
+
+      return () => {
+        document.removeEventListener('mousedown' , handleClickOutside); // Clean up the event listener
+      };
+    }, [showForm]); 
+
 
 
     // // save tasks to LoccalStoarge whenever takes change
@@ -142,7 +165,8 @@ function TaskProvider({children}){
         setToDate,
         ToStartCounts,
         InProgressCounts,
-        CompletedCounts
+        CompletedCounts,
+        formRef
       }}
     >
       {children}

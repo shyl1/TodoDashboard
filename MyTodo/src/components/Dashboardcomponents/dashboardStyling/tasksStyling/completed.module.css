@@ -7,6 +7,7 @@
   font-size: 25px;
   display: flex;
   margin-bottom: 10px;
+  align-items: center;
 }
 
 .circleIcon{
@@ -22,6 +23,12 @@
   height: 100%;
   background-color:#F2F6FF ;
   padding: 30px;
+  flex:1;
+  overflow-y: auto;
+  padding: 5px;
+  margin: 5px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
 }
 
 .card{
@@ -103,3 +110,26 @@
   color: #202D48;
 }
 
+
+
+@media (max-width: 1409px) {
+  .text{
+    font-size:20px;
+  }
+
+  .circleIcon{
+    font-size: 15px;
+  }
+
+  .innerContainer{
+    padding: 10px;
+  }
+
+  .card{
+    padding: 10px;
+  }
+
+  .editingIcon{
+    font-size: 15px;
+  }
+}

@@ -8,7 +8,7 @@ import TaskContext from '../../../TaskContext';
 
 
 export default function InProgress() {
-  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate ,toDate ,setFormColumn,setShowForm } = useContext(TaskContext);
+  const {tasks , showForm , formColumn , editingTask , addOrUpdateTask , updateTaskStatus , searchTerm , fromDate ,toDate ,setFormColumn,setShowForm , formRef} = useContext(TaskContext);
 
 
    // filter tasks with status "To Start"
@@ -58,24 +58,28 @@ export default function InProgress() {
 
           {
             showForm && formColumn === "in Progress" &&(
-              <ShowForm
-                onSubmit={(title, description) =>
-                  addOrUpdateTask(
-                    editingTask?.id, // Pass the task ID if editing, otherwise null
-                    title,
-                    description,
-                    "in Progress" // Preserve the status as "In Progress"
-                  )
-                }
-                initialTitle={editingTask ? editingTask.title : ""}
-                initialDescription={editingTask ? editingTask.description : ""}
-              />
+              <div ref={formRef}>
+                <ShowForm
+                  onSubmit={(title, description) =>
+                    addOrUpdateTask(
+                      editingTask?.id, // Pass the task ID if editing, otherwise null
+                      title,
+                      description,
+                      "in Progress" // Preserve the status as "In Progress"
+                    )
+                  }
+                  initialTitle={editingTask ? editingTask.title : ""}
+                  initialDescription={editingTask ? editingTask.description : ""}
+                />
+              </div>
             )
           }
             
-            {
-              inPogressTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
-            }
+            
+              {
+                inPogressTasks.map((task) => <DisplayCard key={task.id} task={task}/>)
+              }
+            
 
              {/* Display "Add New Task" button if there are at least one task */}
               {

@@ -113,3 +113,9 @@
 .login:hover{
   text-decoration: underline;
 }
+
+@media (max-width: 1409px) {
+  .Container{
+    margin: 150px auto;
+  }
+}

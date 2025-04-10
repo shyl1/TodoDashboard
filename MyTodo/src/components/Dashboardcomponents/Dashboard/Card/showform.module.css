@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .inputField{
   width: 100%;
   outline: none;
@@ -24,6 +25,7 @@
   padding: 15px;
   font-size: 20px;
 }
+
 ::placeholder{
   font-size: 20px;
 }
